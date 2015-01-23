@@ -103,17 +103,7 @@ public class DmxRestPlugin extends PluginActivator {
     private JSONArray toJSON(List<RelatedTopic> items) throws JSONException {
         JSONArray list = new JSONArray();
         for (RelatedTopic item : items) {
-            JSONObject json = new JSONObject();
-            json.put("id", item.getId());
-            json.put("type", item.getTypeUri());
-            json.put("uri", item.getUri());
-            json.put("value", item.getSimpleValue());
-
-            JSONObject resources = new JSONObject();
-            resources.put("topic", uri("/rest/topic/%d", item.getId()));
-            json.put("resources", resources);
-
-            list.put(json);
+            list.put(toJSON(item));
         }
         return list;
     }
